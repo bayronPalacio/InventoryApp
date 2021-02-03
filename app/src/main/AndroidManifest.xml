@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".OcrProdRecActivity"></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,14 +25,16 @@
         </activity>
         <activity
             android:name=".Barcode.BarcodeScanningActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/FullScreenTheme" />
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="sensorPortrait"
-            android:theme="@style/NoActionBarTheme">
+            android:screenOrientation="sensorPortrait">
 
         </activity>
+
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="ocr,ica" />
     </application>
 
 </manifest>

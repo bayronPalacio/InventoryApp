@@ -4,73 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
-    tools:context=".MainActivity"
-    app:layoutDescription="@xml/activity_main_scene">
+    android:background="@color/colorCard"
+    app:layoutDescription="@xml/activity_main_scene"
+    tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
         android:gravity="center_horizontal"
-        android:padding="@dimen/_16dp"
-        android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
-        android:textColor="@color/colorButton"
-        android:textSize="@dimen/_40sdp"
-        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:src="@drawable/logo2"
+        android:textColor="@color/colorBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvCompany"
+        android:gravity="center_horizontal"
+        android:layout_margin="@dimen/_16sdp"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/_24sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardBarcode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_16sdp"
-        app:cardBackgroundColor="@color/colorCard"
+        android:layout_margin="@dimen/_32sdp"
+        app:cardBackgroundColor="@color/colorAccent"
         app:cardElevation="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvCompany"
         app:shapeAppearance="@style/CardShape">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textSize="@dimen/_24sdp"
             android:padding="@dimen/_36sdp"
             android:text="@string/barcode"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_24sdp" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardZxing"
+        android:id="@+id/cardOcr"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_16sdp"
-        app:cardBackgroundColor="@color/colorCard"
+        android:layout_margin="@dimen/_32sdp"
+        app:cardBackgroundColor="@color/colorAccent"
         app:cardElevation="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardBarcode"
         app:shapeAppearance="@style/CardShape">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/_36sdp"
+            android:text="@string/ocr"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_24sdp" />
+    </com.google.android.material.card.MaterialCardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="@dimen/_36sdp"
-                android:textSize="@dimen/_24sdp"
-                android:text="@string/ocr"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-        </LinearLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardProdRec"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_32sdp"
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardElevation="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardOcr"
+        app:shapeAppearance="@style/CardShape">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/_36sdp"
+            android:text="@string/prodRec"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_24sdp" />
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.motion.widget.MotionLayout>

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#03a9f5</color>
+    <color name="colorPrimary">#ff6e40</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#dff1f9</color>
+    <color name="colorCard">#1f1f1f</color>
 
     <color name="colorButton">#ed4a44</color>
-    <color name="colorCard">#0091EA</color>
+    <color name="colorAccent">#ff6e40</color>
 
     <color name="colorBarcodeBackground">#99000000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorPrimaryText">#090909</color>
     <color name="colorSecondaryText">#504C4C</color>
+    <color name="colorBackground1">#dff1f9</color>
+    <color name="colorBackground">#cccccc</color>
 </resources>

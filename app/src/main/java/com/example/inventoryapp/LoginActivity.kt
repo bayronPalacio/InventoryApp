@@ -3,6 +3,7 @@ package com.example.inventoryapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -31,7 +32,10 @@ class LoginActivity : AppCompatActivity() {
                     Request.Method.POST, urlPath, user,
                     { response ->
                         if (response["responseServer"].toString().equals("Yes")) {
-                            startActivity(Intent(this, MainActivity::class.java))
+                            val company = response["CompanyName"].toString()
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.putExtra("company", company)
+                            startActivity(intent)
                         } else {
                             Toast.makeText(this, "Your account or password is incorrect!", Toast.LENGTH_LONG).show()
                         }

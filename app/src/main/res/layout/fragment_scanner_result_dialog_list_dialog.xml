@@ -3,38 +3,39 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@color/colorCard"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:hint="@string/barcode"
-        app:hintTextColor="@android:color/black"
-        app:boxStrokeColor="@android:color/black"
-        android:layout_margin="16dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColorHint="@color/colorCard">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/etBarcode"
             android:enabled="false"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@color/colorBackground"
+            android:hint="@string/barcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:hint="@string/qty"
-        app:hintTextColor="@android:color/black"
-        app:boxStrokeColor="@android:color/black"
-        android:layout_margin="16dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/colorCard">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/etQty"
-            android:textColor="@android:color/black"
+            android:textColor="@color/colorPrimaryText"
+            android:background="@color/colorBackground"
+            android:hint="@string/qty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -45,7 +46,7 @@
         android:text="@string/submit"
         android:insetTop="0dp"
         app:cornerRadius="0dp"
-        app:backgroundTint="@color/colorButton"
+        app:backgroundTint="@color/colorAccent"
         android:insetBottom="0dp"
         style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         app:iconGravity="textStart"

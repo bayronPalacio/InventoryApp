@@ -8,10 +8,7 @@ import android.view.OrientationEventListener
 import android.view.Surface
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.Preview
-import androidx.camera.core.TorchState
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.example.inventoryapp.R
@@ -32,6 +29,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
 
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var binding: ActivityBarcodeScanningBinding
+
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
     private var flashEnabled = false
@@ -39,6 +37,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBarcodeScanningBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this)
@@ -78,9 +77,9 @@ class BarcodeScanningActivity : AppCompatActivity() {
             .build()
 
         val orientationEventListener = object : OrientationEventListener(this as Context) {
-            override fun onOrientationChanged(orientation : Int) {
+            override fun onOrientationChanged(orientation: Int) {
                 // Monitors orientation values to determine the target rotation value
-                val rotation : Int = when (orientation) {
+                val rotation: Int = when (orientation) {
                     in 45..134 -> Surface.ROTATION_270
                     in 135..224 -> Surface.ROTATION_180
                     in 225..314 -> Surface.ROTATION_90
@@ -92,7 +91,6 @@ class BarcodeScanningActivity : AppCompatActivity() {
         }
         orientationEventListener.enable()
 
-        //switch the analyzers here, i.e. MLKitBarcodeAnalyzer, ZXingBarcodeAnalyzer
         class ScanningListener : ScanningResultListener {
             override fun onScanned(result: String) {
                 runOnUiThread {
@@ -110,14 +108,13 @@ class BarcodeScanningActivity : AppCompatActivity() {
             }
         }
 
-        var analyzer: ImageAnalysis.Analyzer = MLKitBarcodeAnalyzer(ScanningListener())
+        val analyzer: ImageAnalysis.Analyzer = MLKitBarcodeAnalyzer(ScanningListener())
 
         imageAnalysis.setAnalyzer(cameraExecutor, analyzer)
 
         preview.setSurfaceProvider(binding.cameraPreview.surfaceProvider)
 
-        val camera =
-            cameraProvider?.bindToLifecycle(this, cameraSelector, imageAnalysis, preview)
+        val camera = cameraProvider?.bindToLifecycle(this, cameraSelector, imageAnalysis, preview)
 
         if (camera?.cameraInfo?.hasFlashUnit() == true) {
             binding.ivFlashControl.visibility = View.VISIBLE
@@ -145,4 +142,5 @@ class BarcodeScanningActivity : AppCompatActivity() {
         // Shut down our background executor
         cameraExecutor.shutdown()
     }
+
 }

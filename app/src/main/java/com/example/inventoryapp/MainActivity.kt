@@ -12,18 +12,33 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.inventoryapp.Barcode.BarcodeScanningActivity
 import com.example.inventoryapp.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private val cameraPermissionRequestCode = 1
     private lateinit var binding: ActivityMainBinding
+    private lateinit var scanType: ScanType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
+        tvCompany.text = "Welcome\n" + intent.getStringExtra("company")
+
         binding.cardBarcode.setOnClickListener {
+            scanType = ScanType.Barcode
+            startScanning()
+        }
+
+        binding.cardOcr.setOnClickListener {
+            scanType = ScanType.Ocr
+            startScanning()
+        }
+
+        binding.cardProdRec.setOnClickListener{
+            scanType = ScanType.ProdRec
             startScanning()
         }
     }
@@ -67,7 +82,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun openCameraWithScanner() {
-        BarcodeScanningActivity.start(this)
+        when (scanType) {
+            ScanType.Barcode -> BarcodeScanningActivity.start(this)
+            ScanType.Ocr, ScanType.ProdRec -> OcrProdRecActivity.start(this, scanType)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -81,5 +99,11 @@ class MainActivity : AppCompatActivity() {
                 openCameraWithScanner()
             }
         }
+    }
+
+    enum class ScanType{
+        Barcode,
+        Ocr,
+        ProdRec
     }
 }

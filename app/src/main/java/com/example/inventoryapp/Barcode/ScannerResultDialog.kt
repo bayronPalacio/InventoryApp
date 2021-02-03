@@ -36,8 +36,8 @@ class ScannerResultDialog(private val listener: DialogDismissListener) : BottomS
         binding.etBarcode.setText(scannedResult)
         binding.btnSubmit.setOnClickListener{
             val fileReader: BufferedReader = context!!.applicationContext.assets.open("url.txt")?.bufferedReader()
-            var url = fileReader?.readLine()
-            var urlPath = "$url/addProduct"
+            val url = fileReader.readLine()
+            val urlPath = "$url/addProduct"
 
             val product = JSONObject()
             product.put("Barcode", etBarcode.text.toString())
