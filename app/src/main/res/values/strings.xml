@@ -11,4 +11,5 @@
     <string name="ocr">OCR</string>
     <string name="imgRecognition">Image Recognition</string>
     <string name="prodRec">Item Recognition</string>
+    <string name="companyName">CompanyName</string>
 </resources>

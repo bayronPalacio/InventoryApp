@@ -1,5 +1,6 @@
 package com.example.inventoryapp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +10,6 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.fragment_scanner_result_dialog_list_dialog.*
 import org.json.JSONObject
 import java.io.BufferedReader
 
@@ -24,25 +24,34 @@ class LoginActivity : AppCompatActivity() {
             val urlPath = "$url/login"
 
             val user = JSONObject()
-            user.put("Email", etEmail.text.toString())
-            user.put("Password", etPassword.text.toString())
+            user.put("email", etEmail.text.toString())
+            user.put("password", etPassword.text.toString())
 
             val que = Volley.newRequestQueue(this)
             val req = JsonObjectRequest(
-                    Request.Method.POST, urlPath, user,
-                    { response ->
-                        if (response["responseServer"].toString().equals("Yes")) {
-                            val company = response["CompanyName"].toString()
-                            val intent = Intent(this, MainActivity::class.java)
-                            intent.putExtra("company", company)
-                            startActivity(intent)
-                        } else {
-                            Toast.makeText(this, "Your account or password is incorrect!", Toast.LENGTH_LONG).show()
-                        }
-                        println("Response from server -> " + response["responseServer"])
-                    }, {
-                println("Error from server")
-            }
+                Request.Method.POST, urlPath, user,
+                { response ->
+                    if (!response["responseServer"].toString().equals("no")) {
+                        val company = response["responseServer"].toString()
+//                        val collection = response["collection"].toString()
+                        val preference = getSharedPreferences(resources.getString(R.string.app_name), Context.MODE_PRIVATE)
+                        val editor = preference.edit()
+                        editor.putString(getString(R.string.companyName), company)
+                        editor.apply()
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.putExtra("company", company)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Your account or password is incorrect!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                    println("Response from server -> " + response["responseServer"])
+                }, {
+                    println("Error from server")
+                }
             )
             que.add(req)
         }

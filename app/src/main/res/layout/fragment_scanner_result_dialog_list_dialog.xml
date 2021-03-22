@@ -36,6 +36,7 @@
             android:textColor="@color/colorPrimaryText"
             android:background="@color/colorBackground"
             android:hint="@string/qty"
+            android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

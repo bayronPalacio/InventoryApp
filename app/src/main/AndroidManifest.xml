@@ -22,6 +22,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".Barcode.BarcodeScanningActivity"
@@ -29,7 +30,6 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="sensorPortrait">
-
         </activity>
 
         <meta-data
