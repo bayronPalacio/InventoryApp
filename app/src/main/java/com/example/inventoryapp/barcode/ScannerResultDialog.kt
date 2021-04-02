@@ -1,8 +1,7 @@
-package com.example.inventoryapp.Barcode
+package com.example.inventoryapp.barcode
 
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import android.widget.Toast
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.example.inventoryapp.MainActivity
 import com.example.inventoryapp.R
 import com.example.inventoryapp.databinding.FragmentScannerResultDialogListDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -96,7 +96,7 @@ class ScannerResultDialog(private val listener: DialogDismissListener) :
                                 Toast.LENGTH_LONG
                             ).show()
                         }
-                        startActivity(Intent(context, BarcodeScanningActivity::class.java))
+                        BarcodeScanningActivity.start(context!!, MainActivity.ScanType.Barcode)
                         println("Response from server -> " + response["responseServer"])
                     }, {
                         println("Error from server")

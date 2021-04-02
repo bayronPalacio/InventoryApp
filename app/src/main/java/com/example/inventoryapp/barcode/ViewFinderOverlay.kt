@@ -1,4 +1,4 @@
-package com.example.inventoryapp.Barcode
+package com.example.inventoryapp.barcode
 
 import android.content.Context
 import android.graphics.*

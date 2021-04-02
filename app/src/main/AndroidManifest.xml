@@ -15,22 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OcrProdRecActivity"></activity>
+        <activity android:name=".ProductsActivity"></activity>
+        <activity android:name=".OcrProdRecActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
-            android:name=".Barcode.BarcodeScanningActivity"
+            android:name=".barcode.BarcodeScanningActivity"
             android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="sensorPortrait">
-        </activity>
+            android:screenOrientation="sensorPortrait"></activity>
 
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"

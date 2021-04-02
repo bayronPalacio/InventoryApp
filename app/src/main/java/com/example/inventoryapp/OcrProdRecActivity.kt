@@ -12,7 +12,7 @@ import android.view.View
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.example.inventoryapp.Barcode.ScannerResultDialog
+import com.example.inventoryapp.barcode.ScannerResultDialog
 import com.example.inventoryapp.databinding.ActivityOcrProdRecBinding
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.mlkit.vision.common.InputImage
@@ -45,7 +45,7 @@ class OcrProdRecActivity : AppCompatActivity() {
     private lateinit var cameraExecutor: ExecutorService
     private var flashEnabled = false
     private var imageCapture: ImageCapture? = null
-    private var scanType: MainActivity.ScanType = MainActivity.ScanType.Ocr
+    private var scanType: MainActivity.ScanType = MainActivity.ScanType.QR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -139,7 +139,7 @@ class OcrProdRecActivity : AppCompatActivity() {
             override fun onCaptureSuccess(image: ImageProxy) {
                 val mediaImage = image.image
                 val inputImage = InputImage.fromMediaImage(mediaImage, image.imageInfo.rotationDegrees)
-                if(scanType.equals(MainActivity.ScanType.Ocr)){
+                if(scanType.equals(MainActivity.ScanType.QR)){
                     ocrAnalyzer(inputImage)
                 }else{
                     prodRecAnalyser(inputImage)

@@ -29,7 +29,7 @@
                 app:customFloatValue="-200" />
         </Constraint>
         <Constraint
-            android:id="@+id/cardOcr"
+            android:id="@+id/cardQR"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/cardOcr"
+            app:layout_constraintTop_toBottomOf="@+id/cardQR"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/cardBarcode"
             app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/cardOcr"
+            android:id="@+id/cardQR"
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_32sdp"
@@ -106,7 +106,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/cardOcr"
+            app:layout_constraintTop_toBottomOf="@+id/cardQR"
             app:layout_constraintStart_toStartOf="parent"
             android:id="@+id/cardProdRec"
             android:layout_marginStart="@dimen/_16sdp"

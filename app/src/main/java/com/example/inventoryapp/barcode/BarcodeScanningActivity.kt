@@ -1,8 +1,9 @@
-package com.example.inventoryapp.Barcode
+package com.example.inventoryapp.barcode
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Size
 import android.view.OrientationEventListener
 import android.view.Surface
@@ -11,9 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.example.inventoryapp.*
 import com.example.inventoryapp.R
 import com.example.inventoryapp.databinding.ActivityBarcodeScanningBinding
 import com.google.common.util.concurrent.ListenableFuture
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -21,8 +25,10 @@ class BarcodeScanningActivity : AppCompatActivity() {
 
     companion object {
         @JvmStatic
-        fun start(context: Context) {
-            val starter = Intent(context, BarcodeScanningActivity::class.java)
+        fun start(context: Context, scanType: MainActivity.ScanType) {
+            val starter = Intent(context, BarcodeScanningActivity::class.java).apply {
+                putExtra(ARG_SCAN_TYPE, scanType)
+            }
             context.startActivity(starter)
         }
     }
@@ -33,12 +39,13 @@ class BarcodeScanningActivity : AppCompatActivity() {
     /** Blocking camera operations are performed using this executor */
     private lateinit var cameraExecutor: ExecutorService
     private var flashEnabled = false
+    private var scanType: MainActivity.ScanType = MainActivity.ScanType.QR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBarcodeScanningBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+        scanType = intent?.getSerializableExtra(ARG_SCAN_TYPE) as MainActivity.ScanType
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         // Initialize our background executor
@@ -96,14 +103,21 @@ class BarcodeScanningActivity : AppCompatActivity() {
                 runOnUiThread {
                     imageAnalysis.clearAnalyzer()
                     cameraProvider?.unbindAll()
-                    ScannerResultDialog.newInstance(
-                        result,
-                        object : ScannerResultDialog.DialogDismissListener {
-                            override fun onDismiss() {
-                                bindPreview(cameraProvider)
-                            }
-                        })
-                        .show(supportFragmentManager, ScannerResultDialog::class.java.simpleName)
+                    if(scanType.equals(MainActivity.ScanType.QR)){
+                        val arrayProductType = object : TypeToken<ArrayList<Product>>() {}.type
+                        val productsList: ArrayList<Product> = Gson().fromJson(result, arrayProductType)
+
+                        ProductsActivity.start(this@BarcodeScanningActivity, productsList)
+                    }else{
+                        ScannerResultDialog.newInstance(
+                            result,
+                            object : ScannerResultDialog.DialogDismissListener {
+                                override fun onDismiss() {
+                                    bindPreview(cameraProvider)
+                                }
+                            })
+                            .show(supportFragmentManager, ScannerResultDialog::class.java.simpleName)
+                    }
                 }
             }
         }

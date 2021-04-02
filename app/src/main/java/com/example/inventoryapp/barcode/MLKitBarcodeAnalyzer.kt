@@ -1,4 +1,4 @@
-package com.example.inventoryapp.Barcode
+package com.example.inventoryapp.barcode
 
 import android.util.Log
 import androidx.camera.core.ExperimentalGetImage

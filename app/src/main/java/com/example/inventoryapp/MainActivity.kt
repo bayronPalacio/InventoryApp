@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.inventoryapp.Barcode.BarcodeScanningActivity
+import com.example.inventoryapp.barcode.BarcodeScanningActivity
 import com.example.inventoryapp.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
             startScanning()
         }
 
-        binding.cardOcr.setOnClickListener {
-            scanType = ScanType.Ocr
+        binding.cardQR.setOnClickListener {
+            scanType = ScanType.QR
             startScanning()
         }
 
@@ -83,8 +83,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun openCameraWithScanner() {
         when (scanType) {
-            ScanType.Barcode -> BarcodeScanningActivity.start(this)
-            ScanType.Ocr, ScanType.ProdRec -> OcrProdRecActivity.start(this, scanType)
+            ScanType.Barcode, ScanType.QR -> BarcodeScanningActivity.start(this, scanType)
+            ScanType.ProdRec -> OcrProdRecActivity.start(this, scanType)
         }
     }
 
@@ -103,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
     enum class ScanType{
         Barcode,
-        Ocr,
+        QR,
         ProdRec
     }
 }
